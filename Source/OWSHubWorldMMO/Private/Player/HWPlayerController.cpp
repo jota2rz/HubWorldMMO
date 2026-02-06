@@ -70,7 +70,7 @@ AHWPlayerController::AHWPlayerController()
 void AHWPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	SetReplicates(true);
 }
 
 void AHWPlayerController::OnPossess(APawn* InPawn)
@@ -463,6 +463,7 @@ void AHWPlayerController::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >
 	Params.Condition = COND_OwnerOnly;
 
 	DOREPLIFETIME_WITH_PARAMS_FAST(AHWPlayerController, SupplyPodsOpened, Params);
+	//DOREPLIFETIME(AHWPlayerController, SupplyPodsOpened);
 }
 
 

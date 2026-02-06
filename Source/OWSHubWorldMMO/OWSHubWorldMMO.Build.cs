@@ -28,7 +28,7 @@ public class OWSHubWorldMMO : ModuleRules
             "OWSPlugin"
         });
 
-		PublicIncludePathModuleNames.AddRange(new string[] { 
+        PublicIncludePathModuleNames.AddRange(new string[] { 
 			"OWSPlugin" 
 		});
 

@@ -49,7 +49,7 @@ struct FHWInitializationPart
 USTRUCT(BlueprintType, Blueprintable)
 struct FHWSupplyPodOpenedItem : public FFastArraySerializerItem
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 		friend struct FHWSupplyPodMaster;
 
@@ -66,12 +66,17 @@ struct FHWSupplyPodOpenedItem : public FFastArraySerializerItem
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Persistence")
 		FGuid SupplyPodGUID;
+
+	bool operator==(const FHWSupplyPodOpenedItem& Other) const
+	{
+		return SupplyPodGUID == Other.SupplyPodGUID;
+	}
 };
 
 USTRUCT(BlueprintType, Blueprintable)
 struct FHWSupplyPodMaster : public FFastArraySerializer
 {
-	GENERATED_USTRUCT_BODY()
+	GENERATED_BODY()
 
 		friend struct FHWSupplyPodOpenedItem;
 
@@ -80,12 +85,21 @@ struct FHWSupplyPodMaster : public FFastArraySerializer
 
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Persistence")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Persistence", meta = (ShowOnlyInnerProperties))
 		TArray<FHWSupplyPodOpenedItem> SupplyPods;
 
 	bool NetDeltaSerialize(FNetDeltaSerializeInfo& DeltaParms)
 	{
-		return FastArrayDeltaSerialize<FHWSupplyPodOpenedItem>(SupplyPods, DeltaParms, *this);
+		//return FastArrayDeltaSerialize<FHWSupplyPodOpenedItem>(SupplyPods, DeltaParms, *this);
+		return FastArrayDeltaSerialize(
+			SupplyPods, DeltaParms, *this
+		);
+	}
+
+	void AddItem(FHWSupplyPodOpenedItem NewItem)
+	{
+		SupplyPods.Add(NewItem);
+		MarkItemDirty(SupplyPods.Last());
 	}
 };
 
@@ -181,7 +195,6 @@ public:
 
 	void PawnLeavingGame();
 
-
 	//Initialization
 	UPROPERTY(EditAnywhere, Category = "HW|Initialization")
 		TArray<FHWInitializationPart> InitializationParts;
@@ -271,8 +284,6 @@ public:
 
 	void NotifyZoneServerToTravelTo(const FString& ServerAndPort);
 	void ErrorZoneServerToTravelTo(const FString& ErrorMsg);
-
-	
 
 protected:
 
