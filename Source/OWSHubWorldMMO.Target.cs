@@ -12,13 +12,5 @@ public class OWSHubWorldMMOTarget : TargetRules
         IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
         ExtraModuleNames.AddRange( new string[] { "OWSHubWorldMMO" } );
-
-        /*
-        if (!bUseIris)
-        {
-            BuildEnvironment = TargetBuildEnvironment.Unique;
-            bUseIris = true;
-        }
-        */
     }
 }

@@ -10,13 +10,14 @@
 ASupplyPod::ASupplyPod()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	bReplicates = true;
+	//bReplicates = true;
 }
 
 // Called when the game starts or when spawned
 void ASupplyPod::BeginPlay()
 {
 	Super::BeginPlay();
+	SetReplicates(true);
 	
 	RefreshSupplyPodState();
 }

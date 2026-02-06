@@ -4,7 +4,7 @@
 #include "Abilities/Tasks/AbilityTask.h"
 #include "AbilityTask_WaitLanded.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FApplyRootMotionJumpForceDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FApplyRootMotionJumpForceDelegate2);
 
 /**
  * 
@@ -15,7 +15,7 @@ class OWSHUBWORLDMMO_API UAbilityTask_WaitLanded : public UAbilityTask
 	GENERATED_UCLASS_BODY()
 
 	UPROPERTY(BlueprintAssignable)
-		FApplyRootMotionJumpForceDelegate OnLanded;
+		FApplyRootMotionJumpForceDelegate2 OnLanded;
 	
 	UFUNCTION()
 		void OnLandedCallback(const FHitResult& Hit);
