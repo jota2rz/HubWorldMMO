@@ -83,3 +83,6 @@ Content/MSPresets/*
 !OWSInstanceLauncher/*
 !OWSInstanceLauncher/**
 OWSInstanceLauncher/*.txt
+
+# Credentials
+credentials.txt
