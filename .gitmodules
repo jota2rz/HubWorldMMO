@@ -1,3 +1,6 @@
 [submodule "Plugins/OWSPlugin"]
 	path = Plugins/OWSPlugin
 	url = https://github.com/jota2rz/OWSPlugin.git
+[submodule "Plugins/MultiServerReplicationEx"]
+	path = Plugins/MultiServerReplicationEx
+	url = https://github.com/jota2rz/MultiServerReplicationEx.git
