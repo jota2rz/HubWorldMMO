@@ -4,3 +4,6 @@
 [submodule "Plugins/MultiServerReplicationEx"]
 	path = Plugins/MultiServerReplicationEx
 	url = https://github.com/jota2rz/MultiServerReplicationEx.git
+[submodule "OWS"]
+	path = OWS
+	url = https://github.com/jota2rz/OWS.git
