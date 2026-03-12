@@ -1,0 +1,3 @@
+[submodule "Plugins/OWSPlugin"]
+	path = Plugins/OWSPlugin
+	url = https://github.com/jota2rz/OWSPlugin.git
