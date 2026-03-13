@@ -16,7 +16,13 @@ void UHWAbilitySystemComponent::AbilitySpecInputPressed(FGameplayAbilitySpec& Sp
 
 	if (Spec.IsActive())
 	{
-		InvokeReplicatedEvent(EAbilityGenericReplicatedEvent::InputPressed, Spec.Handle, Spec.ActivationInfo.GetActivationPredictionKey());
+		FPredictionKey PredKey;
+		TArray<UGameplayAbility*> AbilityInstances = Spec.GetAbilityInstances();
+		if (!AbilityInstances.IsEmpty())
+		{
+			PredKey = AbilityInstances.Last()->GetCurrentActivationInfo().GetActivationPredictionKey();
+		}
+		InvokeReplicatedEvent(EAbilityGenericReplicatedEvent::InputPressed, Spec.Handle, PredKey);
 	}
 }
 
@@ -27,7 +33,13 @@ void UHWAbilitySystemComponent::AbilitySpecInputReleased(FGameplayAbilitySpec& S
 
 	if (Spec.IsActive())
 	{
-		InvokeReplicatedEvent(EAbilityGenericReplicatedEvent::InputReleased, Spec.Handle, Spec.ActivationInfo.GetActivationPredictionKey());
+		FPredictionKey PredKey;
+		TArray<UGameplayAbility*> AbilityInstances = Spec.GetAbilityInstances();
+		if (!AbilityInstances.IsEmpty())
+		{
+			PredKey = AbilityInstances.Last()->GetCurrentActivationInfo().GetActivationPredictionKey();
+		}
+		InvokeReplicatedEvent(EAbilityGenericReplicatedEvent::InputReleased, Spec.Handle, PredKey);
 	}
 }
 
@@ -38,7 +50,7 @@ void UHWAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Input
 	{
 		//Find an ability in the ActivatableAbilities ray for the InputTag
 		FGameplayAbilitySpec* FoundAbilitySpec = ActivatableAbilities.Items.FindByPredicate(
-			[&InputTag](const FGameplayAbilitySpec& AbilitySpec) { return AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag); });
+			[&InputTag](const FGameplayAbilitySpec& AbilitySpec) { return AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag); });
 
 		//If we find it and it has a valid Ability, then add it to the InputPressedSpecHandles and InputHeldSpecHandles arrays
 		if (FoundAbilitySpec && FoundAbilitySpec->Ability)
@@ -56,7 +68,7 @@ void UHWAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& Inpu
 	{
 		//Find an ability in the ActivatableAbilities ray for the InputTag
 		FGameplayAbilitySpec* FoundAbilitySpec = ActivatableAbilities.Items.FindByPredicate(
-			[&InputTag](const FGameplayAbilitySpec& AbilitySpec) { return AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag); });
+			[&InputTag](const FGameplayAbilitySpec& AbilitySpec) { return AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag); });
 
 		//If we find it and it has a valid Ability, then add it to the InputReleasedSpecHandles and InputHeldSpecHandles arrays
 		if (FoundAbilitySpec && FoundAbilitySpec->Ability)

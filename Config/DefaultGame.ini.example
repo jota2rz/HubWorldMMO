@@ -1,7 +1,7 @@
 [/Script/EngineSettings.GeneralProjectSettings]
 ProjectID=106DA20E4765F68BBC638F9C8289F31B
 ProjectName=OWS Hub World MMO Example Project
-OWSAPICustomerKey="e7c5aada-f67d-4553-a074-a301668771eb"
+OWSAPICustomerKey=""
 OWS2APIPath="http://localhost:44302/"
 OWS2InstanceManagementAPIPath="http://localhost:44328/"
 OWS2CharacterPersistenceAPIPath="http://localhost:44323/"

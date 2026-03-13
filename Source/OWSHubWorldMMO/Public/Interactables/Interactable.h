@@ -21,7 +21,7 @@ public:
 		bIsPlayerInstanced = false;
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactable")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactable", Meta = (IgnoreForMemberInitializationTest))
 		FGuid InteractableGUID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactable")

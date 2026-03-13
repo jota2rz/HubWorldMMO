@@ -36,7 +36,7 @@ bool UHWGameplayAbility::DoesAbilitySatisfyTagRequirements(const UAbilitySystemC
 	bool bRequiredTagsAreMissing = false;
 
 	//Handle the built-in tag blocking system on the ability
-	if (AbilitySystemComponent.AreAbilityTagsBlocked(AbilityTags))
+	if (AbilitySystemComponent.AreAbilityTagsBlocked(GetAssetTags()))
 	{
 		bAbilityIsBlockedByTags = true;
 	}
@@ -52,7 +52,7 @@ bool UHWGameplayAbility::DoesAbilitySatisfyTagRequirements(const UAbilitySystemC
 
 	if (AbilitySystem)
 	{
-		AbilitySystem->GetAdditionalActivationTagRequirements(AbilityTags, RequiredTagsCollection, BlockedTagsCollection);
+		AbilitySystem->GetAdditionalActivationTagRequirements(GetAssetTags(), RequiredTagsCollection, BlockedTagsCollection);
 	}
 
 	if (BlockedTagsCollection.Num() || RequiredTagsCollection.Num())

@@ -42,7 +42,7 @@ UObject* UHWAssetManager::SynchronousLoadAsset(const FSoftObjectPath& AssetPath)
 	{
 		TUniquePtr<FScopeLogTime> LogTimePtr;
 
-		if (UAssetManager::IsValid())
+		if (UAssetManager::IsInitialized())
 		{
 			return UAssetManager::GetStreamableManager().LoadSynchronous(AssetPath, false);
 		}

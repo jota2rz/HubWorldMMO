@@ -12,6 +12,8 @@ UHWSettingsLocal* UHWSettingsLocal::Get()
 	return GEngine ? CastChecked<UHWSettingsLocal>(GEngine->GetGameUserSettings()) : nullptr;
 }
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void UHWSettingsLocal::RegisterInputConfig(const UPlayerMappableInputConfig* NewConfig, const bool bIsActive)
 {
 	if (NewConfig)
@@ -42,3 +44,5 @@ int32 UHWSettingsLocal::UnregisterInputConfig(const UPlayerMappableInputConfig* 
 	}
 	return INDEX_NONE;
 }
+
+PRAGMA_ENABLE_DEPRECATION_WARNINGS

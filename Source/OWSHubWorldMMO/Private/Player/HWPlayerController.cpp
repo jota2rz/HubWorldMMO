@@ -70,7 +70,6 @@ AHWPlayerController::AHWPlayerController()
 void AHWPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	SetReplicates(true);
 }
 
 void AHWPlayerController::OnPossess(APawn* InPawn)

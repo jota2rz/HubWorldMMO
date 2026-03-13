@@ -24,10 +24,12 @@ public:
 	const TArray<FLoadedMappableConfigPair>& GetAllRegisteredInputConfigs() const { return RegisteredInputConfigs; }
 
 	/** Register the given input config with the settings to make it available to the player. */
+	PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	void RegisterInputConfig(const UPlayerMappableInputConfig* NewConfig, const bool bIsActive);
 
 	/** Unregister the given input config. Returns the number of configs removed. */
 	int32 UnregisterInputConfig(const UPlayerMappableInputConfig* ConfigToRemove);
+	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 	const TMap<FName, FKey>& GetCustomPlayerInputConfig() const { return CustomKeyboardConfig; }
 

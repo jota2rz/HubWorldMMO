@@ -11,6 +11,9 @@
 
 //class UPlayerMappableInputConfig;
 
+// TODO: Migrate from UPlayerMappableInputConfig to UEnhancedInputUserSettings
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 /** A container to organize loaded player mappable configs to their CommonUI input type */
 USTRUCT(BlueprintType)
 struct FLoadedMappableConfigPair
@@ -77,3 +80,5 @@ struct FMappableConfigPair
 	 */
 	static void UnregisterPair(const FMappableConfigPair& Pair);
 };
+
+PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -86,3 +86,6 @@ OWSInstanceLauncher/*.txt
 
 # Credentials
 credentials.txt
+
+# Sensitive config (use DefaultGame.ini.Example as template)
+Config/DefaultGame.ini

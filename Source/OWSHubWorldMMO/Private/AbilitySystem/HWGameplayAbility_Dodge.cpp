@@ -19,7 +19,7 @@ void UHWGameplayAbility_Dodge::ActivateAbility(const FGameplayAbilitySpecHandle 
 		CharacterMovementComponent->GroundFriction = 0.f;
 
 		//Root Motion Contstant Force
-		FVector WorldDirection;
+		FVector WorldDirection = FVector::ZeroVector;
 		FVector SetVelocityOnFinish = FVector(0.f, 0.f, 0.f );
 
 		//0 = Forwards, 1 = Right, 2 = Backwards, 3 = Left

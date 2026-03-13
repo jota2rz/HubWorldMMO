@@ -2,8 +2,11 @@
 
 
 #include "./AbilitySystem/HWDamageGameplayEffect.h"
+#include "GameplayEffectComponents/TargetTagRequirementsGameplayEffectComponent.h"
 
 UHWDamageGameplayEffect::UHWDamageGameplayEffect()
 {
-	ApplicationTagRequirements.IgnoreTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Combat.State.IFrame")));
+	UTargetTagRequirementsGameplayEffectComponent* TagReqComp = CreateDefaultSubobject<UTargetTagRequirementsGameplayEffectComponent>(TEXT("TargetTagReqs"));
+	TagReqComp->ApplicationTagRequirements.IgnoreTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Combat.State.IFrame")));
+	GEComponents.Add(TagReqComp);
 }

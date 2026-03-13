@@ -33,13 +33,16 @@ UHWCombatAttributeSet::UHWCombatAttributeSet()
 	InitCritRate(1.0f);
 	InitCritDamage(0.5f);
 
-	SetupGameplayEffects();
+	if (!HasAnyFlags(RF_ClassDefaultObject))
+	{
+		SetupGameplayEffects();
+	}
 	SetupGameplayTags();
 }
 
 void UHWCombatAttributeSet::SetupGameplayEffects()
 {
-	UWorld* const World = GEngine->GetWorldFromContextObject(this, EGetWorldErrorMode::LogAndReturnNull);
+	UWorld* const World = GEngine->GetWorldFromContextObject(this, EGetWorldErrorMode::ReturnNull);
 	if (World)
 	{
 		AHWGameMode* HWGameMode = Cast<AHWGameMode>(World->GetAuthGameMode());
