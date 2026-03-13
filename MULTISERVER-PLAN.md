@@ -28,9 +28,9 @@ Each zone is independently configured with three settings:
 | Mode | Proxy | DSTM | Travel Type | Server Jump | Cross-Border Actors |
 |------|-------|------|-------------|-------------|---------------------|
 | SingleServer | Disabled | No | Hard travel | Reconnection | No |
-| SingleServer | Enabled | No | Hard travel | Seamless (proxy handled) | No |
+| SingleServer | Enabled | No | Hard travel | No disconnect (proxy handled) | No |
 | MultiServer | Disabled | Yes | Hard travel | Reconnection | Yes* |
-| MultiServer | Enabled | Yes | Seamless travel** | Seamless (proxy handled) | Yes* |
+| MultiServer | Enabled | Yes | Seamless travel** | No disconnect (proxy handled) | Yes* |
 
 > *Actors seen across zone borders requires the adjacent zone to have DSTM enabled (MultiServer mode) AND the same UE Map configured
 >
@@ -42,6 +42,10 @@ Each zone is independently configured with three settings:
 - **SingleServer + Proxy**: Client connects to proxy. Zone change = proxy handles backend swap internally; client stays connected but gets a loading screen / hard travel (no actor continuity).
 - **MultiServer + No Proxy**: DSTM mesh active between servers. Actors replicate across boundaries. But zone change requires client reconnect to new server (no proxy to maintain session).
 - **MultiServer + Proxy**: Full experience. Client on proxy, DSTM mesh active, seamless boundary crossing, actors visible across zones, no disconnect ever.
+
+### Cross-Region Travel
+
+When a player moves from a zone in one region to a zone in a different region, travel is always **hard travel with reconnection** — the client disconnects from the current region's proxy and reconnects to the destination region's proxy. This applies regardless of zone ServerMode or ProxyEnabled settings, since proxies are scoped per-region and the player cannot stay on a proxy that doesn't serve the destination zone.
 
 ## Architecture Decisions
 
@@ -153,7 +157,7 @@ Player Login → GetServerToConnectTo
 |-------|--------|
 | **GameInstance** | Detect proxy connection mode, swap NetDriver to `ProxyNetDriver` when connecting through proxy |
 | **GameMode** | Zone boundary detection + DSTM migration trigger for MultiServer zones (like Nyx's `CheckZoneBoundaries`) |
-| **Zone Boundary Actor** | Blueprint/C++ actor with shimmer wall visual. Shimmer wall blocks when target zone's server is not running (regardless of mode). Once ready: hard travel trigger (SingleServer), or seamless pass-through (MultiServer + Proxy) |
+| **Zone Boundary Actor** | Blueprint/C++ actor with shimmer wall visual. Shimmer wall blocks when target zone's server is not running (regardless of mode). Once ready: hard travel trigger (SingleServer + No Proxy), no-disconnect backend swap (SingleServer + Proxy), client reconnect (MultiServer + No Proxy), or seamless DSTM pass-through (MultiServer + Proxy) |
 | **OWSPlugin** | New API calls: query zone config/status, request zone spin-up, proxy heartbeat |
 
 ## What Stays Unchanged
