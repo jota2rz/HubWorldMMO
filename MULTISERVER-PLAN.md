@@ -119,7 +119,7 @@ Player Login → GetServerToConnectTo
   ├─ PreemptiveZoneSpinUp = Off?
   │    └─ Shimmer wall active until target zone is running
   │       Player approaches → triggers spin-up request to OWS
-  │       Zone server starts → registers with proxy via -JoinProxy (if proxy-enabled)
+  │       Zone server starts → registers with proxy if proxy-enabled
   │       Shimmer wall dissolves
   │
   Transfer depends on zone config:
